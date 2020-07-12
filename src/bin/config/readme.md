@@ -1,0 +1,1 @@
+> It is **important** to import and load this file as the first module in `./src/index`.ts for enviroment config variable in associated `./env/*.env `files

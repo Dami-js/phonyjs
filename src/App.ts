@@ -16,9 +16,9 @@ class App {
     this.initializeErrorHandling();
   }
 
-  public listen() {
-    this.app.listen(process.env.PORT, () => {
-      console.log(`App listening on the port ${process.env.PORT}`);
+  public listen(port: number) {
+    this.app.listen(port, () => {
+      console.log(`App listening on the port ${port}`);
     });
   }
 
