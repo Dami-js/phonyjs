@@ -6,6 +6,8 @@ import compression from 'compression';
 import { Controller } from './bin/interfaces/controller.interface';
 import { errorMiddleware } from './bin/middleware/error.middleware';
 import { Database } from './bin/interfaces/database.interface';
+import exphbs from 'express-handlebars';
+import path from 'path';
 
 class App {
   public app: Application;
@@ -25,9 +27,25 @@ class App {
 
   private initializeMiddlewares() {
     this.app.use(compression());
-    this.app.use(cors());
+    this.app.use(cors()); // CORS middleware
     this.app.use(helmet());
-    this.app.use(morgan('combined'));
+    this.app.use(morgan('dev'));
+    // Static folders
+    this.app.use(express.static(path.join(__dirname, 'public')));
+    this.app.set('views', path.join(__dirname, '/views'));
+
+    // Handlebars
+    this.app.engine(
+      '.hbs',
+      exphbs({
+        defaultLayout: 'main',
+        extname: '.hbs',
+        partialsDir: __dirname + '/views/partials/',
+      })
+    );
+    this.app.set('view engine', '.hbs');
+
+    // Body parser
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
   }
