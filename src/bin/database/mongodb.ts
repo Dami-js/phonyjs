@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import { MONGO_DB_URI } from "../utils/constants";
+import { MONGODB_URI } from "../config";
 
 export async function useMongodb() {
   try {
-    await mongoose.connect(`${MONGO_DB_URI}`, {
+    await mongoose.connect(`${MONGODB_URI}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
