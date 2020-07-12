@@ -1,6 +1,6 @@
-import { ObjectSchema } from "@hapi/joi";
-import { Books } from "./interfaces/books.interface";
-import { ValidateParamExeception } from "../../bin/exceptions/ValidateParamExeception";
+import { ObjectSchema } from '@hapi/joi';
+import { Books } from './interfaces/books.interface';
+import { ValidateParamExeception } from '../../bin/exceptions/ValidateParamExeception';
 
 export class ValidateBooks {
   constructor(private schema: ObjectSchema) {}

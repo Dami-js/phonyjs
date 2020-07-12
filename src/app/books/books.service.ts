@@ -1,5 +1,5 @@
-import { Books } from "./interfaces/books.interface";
-import { CreateBookDto } from "./dto/create-book.dto";
+import { Books } from './interfaces/books.interface';
+import { CreateBookDto } from './dto/create-book.dto';
 
 export class BooksService {
   books: Books[];
