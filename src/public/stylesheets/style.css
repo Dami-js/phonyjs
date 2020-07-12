@@ -1,6 +1,6 @@
 body {
   padding: 100px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
 body .users-column {
@@ -30,4 +30,20 @@ body .users-column .user-display-ele button {
 
 body .users-column .user-display-ele .edit-view {
   display: none;
+}
+
+span.published {
+  color: #ffffff;
+  font-weight: 700;
+  background: #007938;
+  border-radius: 5px;
+  padding: 3px 7px;
+}
+
+span.not-published {
+  color: #ffffff;
+  font-weight: 700;
+  background: #a85a00;
+  border-radius: 5px;
+  padding: 3px 7px;
 }

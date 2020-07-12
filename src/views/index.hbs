@@ -1,0 +1,21 @@
+<div class="container">
+
+<h1>Welcome to {{title}}</h1>
+<p>A realtime progressive Node.js structure for creating scalable, secure and server-side applications.</p>
+<h3>Books</h3>
+<ul id="bookList"></ul>
+
+</div>
+{{> scripts}}
+<script>
+  let ulEl = document.querySelector('#bookList')
+  async function fetchBooks() {
+    const response = await axios.get('/books');
+    let books = response.data;
+    ulEl.innerHTML = 
+    `${books.map(book =>
+      `<li>${book.name} <span class="${book.published ? 'published' : 'not-published'}">${book.published ? 'Published' : 'Not Published'}</span> </li>`
+      )}`
+  }
+  fetchBooks()
+</script>

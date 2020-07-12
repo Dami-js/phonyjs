@@ -1,4 +1,4 @@
-import express, { Request, Response, Application } from 'express';
+import express, { Request, Response } from 'express';
 import { Controller } from '../../bin/interfaces/controller.interface';
 import { BooksService } from './books.service';
 import { StatusCode } from '../../bin/utils/constants';
@@ -11,11 +11,9 @@ const vaidateBook = new ValidateBooks(createBookSchema);
 
 class BooksController implements Controller {
   public path = '/books';
-  public app: Application;
   public router = express.Router();
 
   constructor() {
-    this.app = express();
     this.initializeRoutes();
   }
 
