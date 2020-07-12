@@ -1,16 +1,16 @@
-import express, { Request, Response, Application } from "express";
-import { Controller } from "../../bin/interfaces/controller.interface";
-import { BooksService } from "./books.service";
-import { StatusCode } from "../../bin/utils/constants";
-import { BadRequestError } from "../../bin/utils/errors";
-import { ValidateBooks } from "./validate.books";
-import { createBookSchema } from "./books.schema";
+import express, { Request, Response, Application } from 'express';
+import { Controller } from '../../bin/interfaces/controller.interface';
+import { BooksService } from './books.service';
+import { StatusCode } from '../../bin/utils/constants';
+import { BadRequestError } from '../../bin/utils/errors';
+import { ValidateBooks } from './validate.books';
+import { createBookSchema } from './books.schema';
 
 const booksService = new BooksService();
 const vaidateBook = new ValidateBooks(createBookSchema);
 
 class BooksController implements Controller {
-  public path = "/books";
+  public path = '/books';
   public app: Application;
   public router = express.Router();
 

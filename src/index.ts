@@ -1,7 +1,7 @@
-import { PORT } from "./bin/config";
-import App from "./App";
-import BooksController from "./app/books/books.controller";
-import { useMongodb } from "./bin/database/mongodb";
+import { PORT } from './bin/config';
+import App from './App';
+import BooksController from './app/books/books.controller';
+import { useMongodb } from './bin/database/mongodb';
 
 const controllers = [new BooksController()];
 

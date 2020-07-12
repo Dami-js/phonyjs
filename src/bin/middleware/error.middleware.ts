@@ -1,16 +1,16 @@
-import { NextFunction, Request, Response } from "express";
-import { HttpException } from "../exceptions/HttpExeception";
+import { NextFunction, Request, Response } from 'express';
+import { HttpException } from '../exceptions/HttpExeception';
 
 export function errorMiddleware(
   error: HttpException,
   request: Request,
   response: Response,
   next: NextFunction
-) {
+): void {
   const status = error.status || 500;
-  const message = error.message || "Something went wrong";
+  const message = error.message || 'Something went wrong';
   response.status(status).send({
     status,
-    message
+    message,
   });
 }
