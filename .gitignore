@@ -70,7 +70,7 @@ typings/
 
 # dotenv environment variables file
 # uncomment the next line if you do not want to push your env configurations
-# *.env
+*.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
