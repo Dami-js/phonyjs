@@ -1,8 +1,8 @@
 {
   "name": "phonyjs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "version": "0.1.0-alpha",
+  "description": "A realtime progressive Node.js structure for creating scalable, secure and server-side applications.",
+  "main": "index.js",
   "scripts": {
     "build": "node build.js",
     "start": "NODE_ENV=production node -r module-alias/register ./dist",
@@ -10,8 +10,11 @@
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Damilola J. Seweje",
   "license": "UNLICENSED",
+  "contributors": [
+    "Isaac Oluwatemilorun"
+  ],
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
