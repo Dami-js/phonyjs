@@ -1,14 +1,15 @@
-import { PORT } from './bin/config';
+import { PORT } from './core/config';
 import App from './App';
-import BooksController from './app/books/books.controller';
-import { useMongodb } from './bin/database/mongodb';
-import { IndexController } from './app/index/index.controller';
+import { IndexRouter } from './routes/index.route';
+import { Database } from './core/interfaces/database.interface';
+import { BooksRouter } from './routes/books.route';
+import { DB } from './core/database';
 
-const controllers = [new BooksController(), new IndexController()];
+const routes = [new IndexRouter(), new BooksRouter()];
 
-const databases = [useMongodb];
+const database: Database = new DB();
 
-const app = new App(controllers, databases);
+const app = new App(routes, database);
 
 // Start the server
 const port = Number(PORT);
