@@ -3,19 +3,19 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
-import { Controller } from './bin/interfaces/controller.interface';
-import { errorMiddleware } from './bin/middleware/error.middleware';
-import { Database } from './bin/interfaces/database.interface';
+import { Route } from './core/interfaces/controller.interface';
+import { errorMiddleware } from './core/middleware/error.middleware';
+import { Database } from './core/interfaces/database.interface';
 import exphbs from 'express-handlebars';
 import path from 'path';
 
 class App {
   public app: Application;
-  constructor(controllers: Controller[], databases: Database[]) {
+  constructor(routes: Route[], database: Database) {
     this.app = express();
-    this.connectToTheDatabase(databases);
+    this.connectToTheDatabase(database);
     this.initializeMiddlewares();
-    this.initializeControllers(controllers);
+    this.initializeRoutes(routes);
     this.initializeErrorHandling();
   }
 
@@ -41,7 +41,7 @@ class App {
         defaultLayout: 'main',
         extname: '.hbs',
         partialsDir: __dirname + '/views/partials/',
-      })
+      }),
     );
     this.app.set('view engine', '.hbs');
 
@@ -54,16 +54,17 @@ class App {
     this.app.use(errorMiddleware);
   }
 
-  private initializeControllers(controllers: Controller[]) {
-    controllers.forEach((controller) => {
-      this.app.use(controller.router);
+  private initializeRoutes(routes: Route[]) {
+    routes.forEach((route) => {
+      this.app.use(route.router);
     });
   }
 
-  private connectToTheDatabase(databases: Database[]) {
-    databases.forEach((database) => {
-      database();
-    });
+  private connectToTheDatabase(database: Database) {
+    database;
+    // databases.forEach((database) => {
+    //   database();
+    // });
   }
 }
 
