@@ -1,6 +1,6 @@
 import { AdapterSync } from 'lowdb';
 
-export interface Database {
+export interface IDatabase {
   lowdb: any;
   adapter: AdapterSync<any>;
   [props: string]: any;

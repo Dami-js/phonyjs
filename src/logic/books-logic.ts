@@ -1,10 +1,10 @@
-import { IValidator } from '../utils/interfaces/validator.interface';
+import { IValidator } from '@interfaces/validator.interface';
 
 export async function makeBuildBooks(config: any): Promise<IValidator> {
-  const { schema, validator, value } = config;
+  const { validator, value } = config;
 
   try {
-    const validation = validator(schema, value);
+    const validation = validator(value);
     if (validation.error) {
       return Object.freeze({
         error: true,

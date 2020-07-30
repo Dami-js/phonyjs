@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { MONGODB_URI } from '../config';
+import { MONGODB_URI } from '@config/constants';
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import path from 'path';

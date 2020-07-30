@@ -1,7 +1,7 @@
 import express from 'express';
-import { IndexController } from '../controllers/index.controller';
+import { IndexController } from '@controllers/home';
 
-export class IndexRouter extends IndexController {
+export class IndexRoute extends IndexController {
   public path = '/';
   public router = express.Router();
 

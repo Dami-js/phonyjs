@@ -1,13 +1,13 @@
-import { PORT } from './core/config';
-import App from './App';
-import { IndexRouter } from './routes/index.route';
-import { Database } from './core/interfaces/database.interface';
-import { BooksRouter } from './routes/books.route';
-import { DB } from './core/database';
+import { PORT } from '@config/constants';
+import App from '@config/App';
+import { IndexRoute } from '@routes/index';
+import { IDatabase } from '@interfaces/database.interface';
+import { BooksRoute } from '@routes/books';
+import { DB } from '@database/index';
 
-const routes = [new IndexRouter(), new BooksRouter()];
+const routes = [new IndexRoute(), new BooksRoute()];
 
-const database: Database = new DB();
+const database: IDatabase = new DB();
 
 const app = new App(routes, database);
 

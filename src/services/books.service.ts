@@ -1,8 +1,7 @@
-import { CreateBookDto } from '../utils/dto/create-book.dto';
-import { DB } from '../core/database';
-import { makeBuildBooks } from '../logic/books.logic';
-import { createBookSchema } from '../utils/schemas/books.schema';
-import { validateBooks } from '../helpers/validate.books';
+import { CreateBookDto } from '@dto/create-book.dto';
+import { DB } from '@database/index';
+import { makeBuildBooks } from '@logic/books-logic';
+import { validateBooks } from '@helpers/validate-books';
 
 const lowdb = new DB().lowdb;
 // const lowdb = db.lowdb;
@@ -17,7 +16,6 @@ export class BooksService {
 
   public async create(body: CreateBookDto): Promise<any> {
     const makeBookConfig = {
-      schema: createBookSchema,
       validator: validateBooks,
       value: body,
     };
