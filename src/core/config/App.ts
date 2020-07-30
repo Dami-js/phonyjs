@@ -3,15 +3,15 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
-import { Route } from './core/interfaces/controller.interface';
-import { errorMiddleware } from './core/middleware/error.middleware';
-import { Database } from './core/interfaces/database.interface';
+import { IRoute } from '@interfaces/routes.interface';
+import { errorMiddleware } from '@middlewares/error.middleware';
+import { IDatabase } from '@interfaces/database.interface';
 import exphbs from 'express-handlebars';
 import path from 'path';
 
 class App {
   public app: Application;
-  constructor(routes: Route[], database: Database) {
+  constructor(routes: IRoute[], database: IDatabase) {
     this.app = express();
     this.connectToTheDatabase(database);
     this.initializeMiddlewares();
@@ -54,17 +54,14 @@ class App {
     this.app.use(errorMiddleware);
   }
 
-  private initializeRoutes(routes: Route[]) {
+  private initializeRoutes(routes: IRoute[]) {
     routes.forEach((route) => {
       this.app.use(route.router);
     });
   }
 
-  private connectToTheDatabase(database: Database) {
-    database;
-    // databases.forEach((database) => {
-    //   database();
-    // });
+  private connectToTheDatabase(database: IDatabase) {
+    // Initialize databases
   }
 }
 

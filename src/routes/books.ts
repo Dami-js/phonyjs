@@ -1,7 +1,7 @@
 import express from 'express';
-import { BooksController } from '../controllers/books.controller';
+import { BooksController } from '@controllers/books';
 
-export class BooksRouter extends BooksController {
+export class BooksRoute extends BooksController {
   public path = '/books';
   public router = express.Router();
 

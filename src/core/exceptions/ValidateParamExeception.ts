@@ -1,4 +1,4 @@
-import { HttpException } from './HttpExeception';
+import { HttpException } from '@exceptions/HttpExeception';
 
 export class ValidateParamExeception extends HttpException {
   constructor(message: string) {

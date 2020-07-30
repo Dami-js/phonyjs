@@ -15,6 +15,21 @@
   "contributors": [
     "Isaac Oluwatemilorun"
   ],
+  "_moduleAliases": {
+    "@controllers": "dist/controllers",
+    "@config": "dist/core/config",
+    "@database": "dist/core/database",
+    "@exceptions": "dist/core/exceptions",
+    "@middlewares": "dist/core/middlewares",
+    "@dto": "dist/dto",
+    "@helpers": "dist/helpers",
+    "@interfaces": "dist/interfaces",
+    "@logic": "dist/logic",
+    "@models": "dist/models",
+    "@routes": "dist/routes",
+    "@services": "dist/services",
+    "@utils": "dist/utils"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
