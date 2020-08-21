@@ -11,10 +11,10 @@
   let ulEl = document.querySelector('#bookList')
   async function fetchBooks() {
     const response = await axios.get('/books');
-    let books = response.data;
+    let books = response.data.data;
     ulEl.innerHTML = 
     `${books.map(book =>
-      `<li>${book.name} <span class="${book.published ? 'published' : 'not-published'}">${book.published ? 'Published' : 'Not Published'}</span> </li>`
+      `<li>${book.name} <span class="${book.is_published ? 'published' : 'not-published'}">${book.is_published ? 'Published' : 'Not Published'}</span> </li>`
       )}`
   }
   fetchBooks()

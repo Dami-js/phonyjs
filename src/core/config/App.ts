@@ -4,19 +4,20 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import { IRoute } from '@interfaces/routes.interface';
-import { errorMiddleware } from '@middlewares/error.middleware';
-import { IDatabase } from '@interfaces/database.interface';
 import exphbs from 'express-handlebars';
 import path from 'path';
+import fs from 'fs';
+import { errorLogger } from '@middlewares/errorLogger.middleware';
+import { LOG_PATH, SRC_PATH } from './constants';
+import { IDatabase } from '@interfaces/database.interface';
 
 class App {
   public app: Application;
-  constructor(routes: IRoute[], database: IDatabase) {
+  constructor(routes: IRoute[], databases: IDatabase) {
     this.app = express();
-    this.connectToTheDatabase(database);
+    // this.connectToTheDatabase(databases);
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
-    this.initializeErrorHandling();
   }
 
   public listen(port: number): void {
@@ -29,10 +30,15 @@ class App {
     this.app.use(compression());
     this.app.use(cors()); // CORS middleware
     this.app.use(helmet());
-    this.app.use(morgan('dev'));
+    this.app.use(errorLogger);
+    this.app.use(
+      morgan('combined', {
+        stream: fs.createWriteStream(`${LOG_PATH}/app.log`, { flags: 'a' }),
+      }),
+    );
     // Static folders
-    this.app.use(express.static(path.join(__dirname, 'public')));
-    this.app.set('views', path.join(__dirname, '/views'));
+    this.app.use(express.static(`${SRC_PATH}/public`));
+    this.app.set('views', `${SRC_PATH}/views`);
 
     // Handlebars
     this.app.engine(
@@ -40,7 +46,7 @@ class App {
       exphbs({
         defaultLayout: 'main',
         extname: '.hbs',
-        partialsDir: __dirname + '/views/partials/',
+        partialsDir: `${SRC_PATH}/views/partials/`,
       }),
     );
     this.app.set('view engine', '.hbs');
@@ -50,18 +56,15 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
   }
 
-  private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
-  }
-
   private initializeRoutes(routes: IRoute[]) {
     routes.forEach((route) => {
       this.app.use(route.router);
     });
   }
 
-  private connectToTheDatabase(database: IDatabase) {
+  private async connectToTheDatabase(databases: IDatabase) {
     // Initialize databases
+    databases.mongodb();
   }
 }
 

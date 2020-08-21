@@ -1,35 +1,29 @@
 import { CreateBookDto } from '@dto/create-book.dto';
-import { DB } from '@database/index';
-import { makeBuildBooks } from '@logic/books-logic';
-import { validateBooks } from '@helpers/validate-books';
-
-const lowdb = new DB().lowdb;
-// const lowdb = db.lowdb;
+import { handleError } from '@helpers/makeLogs';
+import { pool } from '@database/postgresSql';
 
 export class BooksService {
   constructor() {}
 
   public async find(): Promise<any> {
-    const books = lowdb.get('books').value();
-    return books;
+    const queryStream = 'SELECT * FROM books ORDER BY id ASC';
+    try {
+      const res = await pool.query(queryStream);
+      return res.rows;
+    } catch (e) {
+      return handleError(e);
+    }
   }
 
   public async create(body: CreateBookDto): Promise<any> {
-    const makeBookConfig = {
-      validator: validateBooks,
-      value: body,
-    };
+    const queryStream =
+      'INSERT INTO books(name, author, is_published) VALUES($1, $2, $3) RETURNING *';
+    const values = [body.name, body.author, body.published];
     try {
-      const makeBook = await makeBuildBooks(makeBookConfig);
-      console.log(makeBook);
-      if (makeBook.error) {
-        return makeBook;
-      }
-      lowdb.get('books').push(makeBook.value).write();
-      const books = lowdb.get('books').value();
-      return books;
-    } catch (error) {
-      console.log(error);
+      const res = await pool.query(queryStream, values);
+      return res.rows[0];
+    } catch (e) {
+      return handleError(e);
     }
   }
 }
